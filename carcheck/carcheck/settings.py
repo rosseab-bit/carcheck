@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'dashboard',
-    'mapkick.django'
+    'mapkick.django',
+    'fontawesomefree'
 ]
 
 MIDDLEWARE = [
