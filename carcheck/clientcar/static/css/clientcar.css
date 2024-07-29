@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+:root {
+  --primary-color: #1f3a5f;
+  --sacondary-color: #4d648d;
+  --blanco-color: #ffffff;
+  --color-search-input-icon: #4d648d;
+  --background-new-car: #fffefb;
+  --background-flota: #fffefb;
+  --color-input-new-car: #f5f4f1;
+  --color-hover-buttons: #cee8ff;
+  --color-buttons: #1f3a5f;
+}
+body{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  margin: 0;
+  height: 100vh;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.mapa-main-section{
+  width: 100%;
+  height: 80%;
+}
+.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100vw;
+  margin: 0;
+  height: 100%;
+}
+.container-header{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 15%;
+  width: 100%;
+}
+.section-title-client{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+.icon-header{
+  font-size: 35px;
+  margin-right: 15px;
+  margin-bottom: 13px;
+}
+.close-icon{
+  position: absolute;
+  right: 5%;
+  top: 30%;
+  font-size: 30px;
+  cursor: pointer;
+}
+p{
+  text-align: center;
+}

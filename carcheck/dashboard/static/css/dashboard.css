@@ -1,14 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 :root {
   --primary-color: #1f3a5f;
   --sacondary-color: #4d648d;
   --blanco-color: #ffffff;
   --color-search-input-icon: #4d648d;
+  --background-new-car: #fffefb;
+  --background-flota: #fffefb;
+  --color-input-new-car: #f5f4f1;
+  --color-hover-buttons: #cee8ff;
+  --color-buttons: #1f3a5f;
 }
 body {
-  font-family: Arial, sans-serif;
   height: 100vh;
   width: 100vw;
   margin: 0;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 h1 {
   color: #333;
@@ -25,10 +33,19 @@ p {
   display: none;
 }
 .a-nav-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--blanco-color);
   text-decoration: none;
   color: inherit;
   width: 100%;
   text-align: center;
+}
+.title-icon-navbar{
+  color: var(--blanco-color);
+  margin-top: 5px;
 }
 .a-profile {
   text-decoration: none;
@@ -79,16 +96,85 @@ p {
   width: 95%;
   height: 100%;
   padding: 5px;
+  background-color: var(--background-flota);
+}
+.card-flota-vehiculos{
+  margin-left: 10px !important;
+}
+.button-card-go-location{
+  width: 100%;
+  background-color: var(--primary-color);
+  border-radius: 10px;
+  color: var(--blanco-color);
+}
+.card-vehiculos-name-coment{
+  height: 140px !important;
 }
 .container-newcar{
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   border-bottom: 1px solid var(--primary-color);
   width: 95%;
   height: 100%;
   padding: 5px;
+  background-color: var(--background-new-car);
+}
+.container-formulario-send{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+.title-section-newcar{
+  display: block;
+  font-size: 35px;
+}
+.container-card-form{
+  width: 40%;
+}
+.container-card-form-split{
+  width: 48%;
+}
+.card-form-modelo-patente{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 40%;
+}
+.input-newcar{
+  background-color: var(--color-input-new-car);
+  width: 100% !important;
+}
+.input-newcar:hover{
+  border-color: #00668c;
+}
+.input-newcar:focus{
+  border-color: #00668c;
+  box-shadow: 10px 10px 5px -200px rgba(0,0,0,0.75);
+-webkit-box-shadow: 10px 10px 5px -200px rgba(0,0,0,0.75);
+-moz-box-shadow: 10px 10px 5px -200px rgba(0,0,0,0.75);
+}
+.lavel-input-newcar{
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+.button-save-new-car{
+  all: unset; /* Elimina todos los estilos inherentes */
+  background-color: var(--color-buttons);
+  color: var(--blanco-color);
+  width: 40%;
+  height: 40px;
+  border-radius: 10px;
+  text-align: center;
+}
+.button-save-new-car:hover{
+  background-color: var(--color-hover-buttons);
+  color: var(--primary-color);
 }
 .container-form-search {
   position: absolute;

@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-au!b*@!=n_sd)wcz13ygbp0qcy1$9t4yzu#t8&+c^*@2y^ljy7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.0.161', 'localhost']
 
 
 # Application definition
@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'dashboard',
+    'clientcar',
+    'loginapp',
     'mapkick.django',
     'fontawesomefree'
 ]
@@ -59,7 +61,9 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
-            os.path.join(BASE_DIR, 'dashboard', 'templates', 'home')
+            os.path.join(BASE_DIR, 'dashboard', 'templates'),
+            os.path.join(BASE_DIR, 'clientcar', 'templates'),
+            os.path.join(BASE_DIR, 'loginapp', 'templates')
             ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -126,6 +130,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'dashboard/static'),
+    os.path.join(BASE_DIR, 'clientcar/static'),
+    os.path.join(BASE_DIR, 'loginapp/static')
 ]
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

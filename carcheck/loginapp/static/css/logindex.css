@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+:root {
+  --primary-color: #1f3a5f;
+  --sacondary-color: #4d648d;
+  --blanco-color: #ffffff;
+  --color-search-input-icon: #4d648d;
+  --background-new-car: #fffefb;
+  --background-flota: #fffefb;
+  --color-input-new-car: #f5f4f1;
+  --color-hover-buttons: #cee8ff;
+  --color-buttons: #1f3a5f;
+}
+body {
+  height: 100vh;
+  width: 100vw;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  background-image: url("/static/img/login-bg.jpg");
+  background-size: cover; /* Hace que la imagen cubra toda la pantalla */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  background-attachment: fixed; /* La imagen se fija en la ventana de visualización */
+  background-position: center; /* Centra la imagen */
+}
+p{
+  text-align: center;
+}
+.container-header {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(190, 190, 190, 0.9);
+}
+.section-title-head {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+.container-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 15%;
+  background-color: rgba(190, 190, 190, 0.9);
+}
+.container-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--blanco-color);
+}
+.icon-header {
+  font-size: 40px;
+  margin-right: 15px;
+}
+.input-tag-user {
+}
+.input-tag-password {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}

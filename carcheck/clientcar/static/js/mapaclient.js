@@ -3,13 +3,14 @@ var marker;
 var latitud;
 var longitud;
 const postUpdatePosition =  async(latitud, longitud) => {
+  const csrfToken = window.myAppConfig.csrfToken;
   const response = await fetch('/dashboard/updateposition', {
     method: 'POST',
     body: JSON.stringify({'Latidud': latitud, 'Longitud': longitud}),
     headers:{
       'Content-Type': 'aplication/json',
       'X-Requested-With': 'XMLHttpRequest',
-      'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+      'X-CSRFToken': csrfToken 
     }
   })
 };
@@ -97,3 +98,4 @@ const updateMarker = (lat, longi, tagmarker) => {
     initializeMap(lat, longi, tagmarker);
   }
 };
+

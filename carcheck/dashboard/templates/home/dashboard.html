@@ -17,7 +17,6 @@
       href="{% static 'css/dashboard.css' %}"
     />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="{% static 'js/mapa.js' %}"></script>
     <!--<script src="{% static 'js/routesview.js' %}"></script>-->
     <!-- fontawesomefree -->
     <link
@@ -36,17 +35,22 @@
       type="text/css"
     />
     <!-- fontawesomefree -->
+    <!-- google fonts 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+     google fonts -->
   </head>
   <body>
     <header class="header-container">
       <div class="contaniner-icon-app">
         <i class="fa-regular fa-map icon-app"></i>
-        <span class="title-icon">Ubinet S.A.</span>
+        <span class="title-icon">Ubicar S.A.</span>
       </div>
       <div class="container-profile-bar">
         <i class="fa-regular fa-user icon-profile"></i>
         <a class="a-profile" href="">
-          <span class="title-profile">LOGOUT</span>
+          <span class="title-profile">Logout</span>
         </a>
       </div>
     </header>
@@ -54,28 +58,31 @@
       <section class="container-bar-dasboard">
         <a class="a-nav-bar" href="/dashboard">
           <i class="fa-solid fa-magnifying-glass icon-bar"></i>
+          <sapn class="title-icon-navbar">Buscar</sapn>
         </a>
         <a class="a-nav-bar" href="/dashboard/flota">
           <i class="fa-solid fa-car-side icon-bar"></i>
+          <sapn class="title-icon-navbar">Autos</sapn>
         </a>
         <a class="a-nav-bar" href="/dashboard/newcar">
           <i class="fa-solid fa-plus icon-bar"></i>
+          <sapn class="title-icon-navbar">Nuevo</sapn>
         </a>
       </section>
       <div
         class="{% if ruta_actual == '/dashboard' %}contaniner-map-dashboard {% elif ruta_actual != '/dashboard' %}hidden{% endif %}"
       >
         <div class="container-form-search">
-          <form class="form-search" method="post">
-            {% csrf_token %}
+          <form id="formSearchPatente" class="form-search">
+	    {% csrf_token %}
             <input
               class="input-search-car"
               type="text"
-              id="search-input-text"
+              id="search-input-patente"
               name="search-input"
-	      placeholder="Ingrese patente"
+              placeholder="Ingrese patente"
             /><br />
-            <button class="button-form" type="submit">
+            <button class="button-form" type="button" id="getlocation">
               <i class="fa-solid fa-magnifying-glass icon-search"></i>
             </button>
           </form>
@@ -85,99 +92,168 @@
       <div
         class="{% if ruta_actual == '/dashboard/flota' %}container-flota{% elif ruta_actual != '/dashboard/flota' %}hidden{% endif %}"
       >
-        <div class="card" style="width: 18rem">
-          <img src="..." class="card-img-top" alt="..." />
-          <div class="card-body">
+        {% for vehiculo in vehiculos %}
+        <div class="card card-flota-vehiculos" style="width: 18rem">
+          <!--<img src="..." class="card-img-top" alt="..." />-->
+          <div class="card-body card-vehiculos-name-coment">
             <h5 class="card-title">
               <i class="fa-regular fa-user"></i>
-              Miguel Ramirez
+              {{vehiculo.conductorname}}
             </h5>
-            <p class="card-text">
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </p>
+            <p class="card-text">{{vehiculo.comentarios}}</p>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">Modelo: Fiat 600</li>
-            <li class="list-group-item">Patente: AKF456</li>
-            <li class="list-group-item">Capacidad: 1T</li>
-            <li class="list-group-item">Estado: OK</li>
+            <li class="list-group-item">
+              <i class="fa-solid fa-car"></i> Modelo:
+              {{vehiculo.modelovehiculo}}
+            </li>
+            <li class="list-group-item">
+              <i class="fa-solid fa-id-card-clip"></i> Patente:
+              {{vehiculo.patentevehiculo}}
+            </li>
+            <li class="list-group-item">
+              <i class="fa-solid fa-dolly"></i> Capcidad de carga:
+              {{vehiculo.capacidadvehiculo}}
+            </li>
+            <li class="list-group-item">
+              <i class="fa-solid fa-chart-simple"></i> Estado:
+              {{vehiculo.estadovehiculo}}
+            </li>
+            <li class="list-group-item">
+	      <button class="button-card-go-location" type="button" id="buttonCardGoLocation">
+		<i class="fa-solid fa-map-location-dot"></i>
+	      </button>
+            </li>
           </ul>
         </div>
+        {% endfor %}
       </div>
       <div
         class="{% if ruta_actual == '/dashboard/newcar' %}container-newcar{% elif ruta_actual != '/dashboard/newcar' %} hidden{% endif %}"
       >
-        <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label"
-            >Conductor</label
-          >
-          <input
-            type="email"
-            class="form-control"
-            id="exampleFormControlInput1"
-            placeholder="name@example.com"
-          />
-        </div>
-        <div class="mb-3">
-          <label for="exampleFormControlTextarea1" class="form-label"
-            >Comentarios</label
-          >
-          <textarea
-            class="form-control"
-            id="exampleFormControlTextarea1"
-            rows="3"
-          ></textarea>
-        </div>
-        <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label"
-            >Modelo de flota</label
-          >
-          <input
-            type="email"
-            class="form-control"
-            id="exampleFormControlInput1"
-            placeholder="name@example.com"
-          />
-        </div>
-        <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label"
-            >Patente de flota</label
-          >
-          <input
-            type="email"
-            class="form-control"
-            id="exampleFormControlInput1"
-            placeholder="name@example.com"
-          />
-        </div>
-        <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label"
-            >Capacidad</label
-          >
-          <input
-            type="email"
-            class="form-control"
-            id="exampleFormControlInput1"
-            placeholder="name@example.com"
-          />
-        </div>
-        <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label"
-            >Estado de la flota</label
-          >
-          <input
-            type="email"
-            class="form-control"
-            id="exampleFormControlInput1"
-            placeholder="name@example.com"
-          />
-        </div>
+        <span class="title-section-newcar">Cargar nueva flota</span>
+        <form id="miFormulario" class="container-formulario-send">
+          <!-- datos del conductor -->
+          <div class="card-form-modelo-patente">
+            <div class="mb-3 mt-5 container-card-form-split">
+              <label
+                for="exampleFormControlInput1"
+                class="form-label lavel-input-newcar"
+                >Conductor</label
+              >
+              <input
+                type="email"
+                class="form-control input-newcar"
+                id="conductorname"
+                name="conductorname"
+                placeholder="Full name"
+              />
+            </div>
+            <div class="mb-3 mt-5 container-card-form-split">
+              <label
+                for="exampleFormControlInput1"
+                class="form-label lavel-input-newcar"
+                >DNI</label
+              >
+              <input
+                type="email"
+                class="form-control input-newcar"
+                id="dniconductor"
+                name="dniconductor"
+                placeholder="Full name"
+              />
+            </div>
+          </div>
+          <!-- datos del conductor -->
+
+          <div class="mb-3 container-card-form">
+            <label
+              for="comentarios"
+              class="form-label lavel-input-newcar"
+              >Comentarios</label>
+            <textarea
+              class="form-control input-newcar"
+              id="comentarios"
+              name="comentarios"
+              rows="3"
+              placeholder="Escriba un comentario aqui"
+            ></textarea>
+          </div>
+
+          <!-- formulario de modelo y patente -->
+          <div class="card-form-modelo-patente">
+            <div class="mb-3 container-card-form-split">
+              <label
+                for="exampleFormControlInput1"
+                class="form-label lavel-input-newcar"
+                >Modelo de flota</label
+              >
+              <input
+                type="email"
+                class="form-control input-newcar"
+                id="modelovehiculo"
+                name="modelovehiculo"
+                placeholder="Modelo de vehiculo"
+              />
+            </div>
+            <div class="mb-3 container-card-form-split">
+              <label
+                for="exampleFormControlInput1"
+                class="form-label lavel-input-newcar"
+                >Patente de flota</label
+              >
+              <input
+                type="email"
+                class="form-control input-newcar"
+                id="patentevehiculo"
+                name="patentevehiculo"
+                placeholder="Patente de vehiculo"
+              />
+            </div>
+          </div>
+          <!-- formulario de modelo y patente -->
+
+          <div class="mb-3 container-card-form">
+            <label
+              for="exampleFormControlInput1"
+              class="form-label lavel-input-newcar"
+              >Capacidad</label
+            >
+            <input
+              type="email"
+              class="form-control input-newcar"
+              id="exampleFormControlInput1"
+              name="capacidadvehiculo"
+              placeholder="1T, 2T etc..."
+            />
+          </div>
+          <div class="mb-3 container-card-form">
+            <label
+              for="exampleFormControlInput1"
+              class="form-label lavel-input-newcar"
+              >Estado del vehiculo</label
+            >
+            <select
+              class="form-select input-newcar"
+              aria-label="Default select example"
+              id="estadovehiculo"
+              name="estadovehiculo"
+            >
+              <option selected>Seleccione una opcion</option>
+              <option value="1">Nuevo</option>
+              <option value="2">Usado</option>
+              <option value="3">Refaccionado</option>
+            </select>
+          </div>
+          <button class="button-save-new-car" type="button" id="submitnewcar">
+            GUARDAR
+          </button>
+        </form>
       </div>
     </main>
     <script>
-      var latitud = {{latitud}}
-      var longitud = {{longitud}}
+      //var latitud = {{latitud}}
+      //var longitud = {{longitud}}
       //console.log('coordenadas: ', latitud, longitud)
         // Inicializar el mapa
       /*var latitud = {{latitud}}
@@ -196,6 +272,9 @@
             .bindPopup('¡Hola! Este es el obelisco.')
             .openPopup();*/
     </script>
+    <script src="{% static 'js/mapa.js' %}"></script>
+    <script src="{% static 'js/saveformnewcar.js' %}"></script>
+    <script src="{% static 'js/searchpatente.js' %}"></script>
     <footer>
       <p>&copy; {{ year }} Mi App</p>
     </footer>
